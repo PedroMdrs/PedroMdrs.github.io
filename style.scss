@@ -1,0 +1,553 @@
+// RESET
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+// ACTUAL CSS
+
+// functions
+@function em($pixels, $context: 16) {
+  @return calc($pixels / $context) * 1em;
+}
+
+@function rem($pixels) {
+  @return calc($pixels / 16) * 1rem;
+}
+
+// variables
+$dark-blue: hsla(209, 100%, 5%, 1);
+$white: #eaf4ff;
+$blue: hsla(194, 67%, 40%, 1);
+$purple: #5a29b1;
+$l-device: 1200px;
+$m-device: 760px;
+$s-device: 480px;
+
+// media-querie mixin
+@mixin device($size) {
+  @if $size == l {
+    @media screen and (min-width: #{$l-device}) {
+      @content;
+    }
+  } @else if $size == m {
+    @media screen and (min-width: #{$m-device}) and (max-width: calc($l-device - 1px)) {
+      @content;
+    }
+  } @else if $size == s {
+    @media screen and (max-width: calc($m-device - 1px)) {
+      @content;
+    }
+  }
+}
+
+// text mixin
+@mixin title($color, $fontsize, $lineheight: 1) {
+  font-family: "Raleway", sans-serif;
+  color: $color;
+  font-size: $fontsize;
+  line-height: $lineheight;
+}
+
+@mixin description($color, $fontsize, $lineheight: 1) {
+  font-family: "Sen", sans-serif;
+  color: $color;
+  font-size: $fontsize;
+  line-height: $lineheight;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin-bottom: rem(50);
+  background-color: $dark-blue;
+  overflow-x: hidden;
+}
+.open {
+  right: 0;
+  visibility: visible;
+}
+.close {
+  right: -500px;
+  visibility: hidden;
+}
+header {
+  width: 100%;
+  overflow-x: hidden;
+  @include device(s) {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -500px;
+    visibility: hidden;
+    background-color: $dark-blue;
+    border: 1px solid $white;
+    border-radius: 5px;
+    height: 100vh;
+    width: 50%;
+    z-index: 1;
+    text-align: center;
+    transition: all 0.2s;
+    > :nth-child(1) {
+      display: none;
+    }
+    .mobile-menu .menu {
+      display: flex;
+      gap: rem(32);
+      flex-direction: column;
+      list-style: none;
+      a {
+        @include description($white, rem(16));
+        text-decoration: none;
+      }
+    }
+  }
+
+  @include device(l) {
+    width: 100%;
+    padding: 20px 20%;
+    display: grid;
+    justify-content: center;
+    position: absolute;
+    z-index: 1;
+    a {
+      text-decoration: none;
+      @include description($white, 24px);
+    }
+    ul {
+      display: inline-flex;
+      list-style: none;
+    }
+    nav {
+      margin-top: 20px;
+    }
+    ul.menu {
+      width: 100%;
+      justify-content: space-between;
+      gap: 50px;
+      a::after {
+        visibility: hidden;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: $dark-blue;
+        margin-top: 5px;
+      }
+      a:hover::after {
+        visibility: visible;
+      }
+    }
+    ul.socials {
+      gap: 20px;
+    }
+    > div {
+      display: flex;
+      justify-content: space-between;
+    }
+    div {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 5px;
+      @include description($white, 16px);
+    }
+  }
+}
+
+hr {
+  margin: 0 rem(40);
+  border-color: hsla(209, 100%, 14%, 1);
+  border-bottom-width: 2px;
+  @include device(l) {
+    margin: 0 5%;
+  }
+}
+.banner {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  padding: 0 rem(48) 0 rem(48);
+  @include device(s) {
+    background-image: url(./assets/images/triangules.png),
+      url(./assets//images/bannerbg.png);
+    background-size: 100% 70%, cover;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+  }
+
+  @include device(m) {
+    background-image: url(./assets/images/triangules_tablet.png),
+      url(./assets//images/bannerbg.png);
+    background-repeat: no-repeat;
+    background-position: center 100%, left bottom;
+    background-size: 120%, cover;
+  }
+  @include device(l) {
+    background-image: url(./assets//images/bannerbg_desktop.png);
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  button {
+    position: fixed;
+    top: rem(30);
+    right: rem(30);
+    border: none;
+    background: none;
+    width: rem(36);
+    z-index: 2;
+    border: 1px solid $white;
+    @include device(m) {
+      width: rem(48);
+    }
+    @include device(l) {
+      display: none;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  > :nth-child(2) {
+    position: absolute;
+    width: 100%;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    @include device(m) {
+      top: 20%;
+    }
+    @include device(l) {
+      display: grid;
+      grid-template-columns: auto auto;
+      align-items: flex-end;
+      top: 30%;
+      left: 45%;
+      padding: 0 10%;
+      gap: rem(50);
+    }
+    div {
+      h1 {
+        @include title($white, rem(48), rem(48));
+        font-style: italic;
+        margin: rem(16) 0 rem(16) 0;
+
+        @include device(l) {
+          @include title($white, rem(96));
+        }
+      }
+      p {
+        @include device(l) {
+          @include description($dark-blue, rem(36));
+        }
+      }
+      @include description($dark-blue, rem(24));
+    }
+    img {
+      width: 50vmax;
+      max-width: 40%;
+      margin-top: 30px;
+      display: inline;
+      @include device(l) {
+        width: rem(300);
+        max-width: max-content;
+      }
+    }
+  }
+}
+
+.about-me {
+  padding: rem(48) rem(48);
+  @include device(l) {
+    padding: 10% 30%;
+  }
+  @include device(m) {
+    margin-top: rem(100);
+  }
+  h2 {
+    margin-bottom: rem(25);
+    text-align: center;
+    @include title($blue, 3rem);
+  }
+  p {
+    @include description($white, 1rem);
+    text-align: center;
+    > :nth-child(n + 1) {
+      color: $blue;
+    }
+    > :nth-child(n + 4) {
+      color: $purple;
+    }
+  }
+  hr {
+    color: white;
+  }
+}
+
+.skills {
+  margin: rem(48) rem(48);
+  > .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: rem(25);
+    margin-top: rem(45);
+    h2 {
+      text-align: center;
+      @include title($blue, rem(48));
+    }
+    .carousel {
+      @include device(l) {
+        margin-top: rem(100);
+      }
+      .carousel-inner {
+        .carousel-items {
+          display: flex;
+          justify-content: center;
+          margin-bottom: rem(10);
+          img {
+            width: rem(128);
+            &:nth-child(n + 2):nth-last-child(-n + 5) {
+              display: none;
+            }
+          }
+          @include device(l) {
+            img:nth-child(-n + 5) {
+              display: flex !important;
+              gap: rem(20) !important;
+            }
+          }
+        }
+        .carousel-indicators {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          @include device(l) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.projects {
+  margin: rem(48) rem(48);
+  a {
+    text-decoration: none;
+  }
+  h2 {
+    margin-top: rem(56);
+    text-align: center;
+    @include title($blue, rem(48));
+  }
+  ul {
+    position: relative;
+    margin-top: rem(32);
+    @include device(l) {
+      display: grid;
+      gap: rem(100);
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      padding: 0 5%;
+      margin-top: rem(100);
+      li:last-child {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+      }
+    }
+    img {
+      width: 100%;
+      height: rem(220);
+      object-fit: cover;
+      object-position: center;
+      @include device(l) {
+        height: rem(400);
+      }
+    }
+    li:nth-child(odd) img {
+      border: 2px solid $blue;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    li:nth-child(even) img {
+      border: 2px solid $white;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    figcaption {
+      @include description($white, 1rem);
+      text-align: center;
+      margin: rem(16) 0 rem(16) 0;
+    }
+  }
+}
+
+.contact {
+  margin: rem(48) rem(48) 0 rem(48);
+  > h2 {
+    @include title($blue, rem(48));
+    text-align: center;
+    margin-bottom: rem(32);
+  }
+  form {
+    @include device(l) {
+      margin: rem(48) 30%;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: rem(16);
+    label {
+      @include description($white, rem(16));
+    }
+    input,
+    textarea {
+      margin-top: rem(8);
+      resize: none;
+      padding: rem(8);
+      outline: none;
+      border: 0;
+      border-radius: rem(10);
+      width: 100%;
+      color: $dark-blue;
+      &::placeholder {
+        @include description(hsla(0, 1%, 59%, 1), rem(12));
+      }
+    }
+  }
+  button {
+    padding: rem(10) rem(64) rem(10) rem(64);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: rem(16);
+    @include title($white, rem(16));
+    @include device(m) {
+      @include title($white, rem(24));
+    }
+    background-color: $blue;
+    border: none;
+    border-radius: rem(5);
+    cursor: pointer;
+    &:hover {
+      background-color: $white;
+      color: $dark-blue;
+    }
+  }
+
+  hr {
+    margin: rem(48) 0;
+    border-color: $white;
+    border-bottom-width: 0px;
+    @include device(l) {
+      margin: rem(48) 10%;
+    }
+  }
+  .wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: rem(16);
+    padding: rem(36) rem(0);
+
+    @include device(l) {
+      margin: 0 20%;
+    }
+    h2 {
+      @include title($blue, rem(16));
+      margin-bottom: rem(16);
+      @include device(m) {
+        font-size: rem(24);
+      }
+      @include device(l) {
+        font-size: rem(24);
+      }
+    }
+    div {
+      @include description($white, rem(8));
+      @include device(m) {
+        @include description($white, rem(12));
+      }
+      @include device(l) {
+        @include description($white, rem(12));
+      }
+      img {
+        width: 1rem;
+        display: inline-block;
+      }
+    }
+    .social-media {
+      display: grid;
+      grid-template-rows: 50% 50%;
+      > div {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: rem(12);
+        a {
+          display: flex;
+          gap: rem(5);
+          align-items: center;
+          text-decoration: none;
+          color: $white;
+          &:hover {
+            color: $blue;
+          }
+        }
+      }
+    }
+    .email {
+      display: grid;
+      grid-template-rows: 50% 50%;
+      margin-left: auto;
+      > :nth-child(2) {
+        font-size: rem(8);
+        > :nth-child(2) {
+          height: 60%;
+          margin-top: rem(15);
+          background-image: url(/assets/images/contact-retangle-bg.png);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+  }
+}
+@include device(m) {
+  :root {
+    font-size: 24px;
+  }
+}
