@@ -66,6 +66,7 @@
 
         <nav class="mobile-menu">
           <ul class="menu">
+            <div id="close-button">X</div>
             <a href="#HOME">HOME</a>
             <a href="#ABOUT">ABOUT ME</a>
             <a href="#SKILLS">SKILLS</a>
@@ -217,28 +218,31 @@
       <hr />
       <section class="contact" id="CONTACT">
         <h2>CONTACT</h2>
-        <form action="">
+        <form action="https://formspree.io/f/mrgveldb" method="post">
           <label
-            >NAME: <input type="text" name="name" placeholder="Type Here"
+            >NAME:
+            <input required type="text" name="name" placeholder="Full Name"
           /></label>
 
           <label
-            >EMAIL: <input type="text" name="email" placeholder="Type Here"
+            >EMAIL:
+            <input required type="text" name="email" placeholder="Email"
           /></label>
 
           <label
-            >SUBJECT: <input type="text" name="subject" placeholder="Type Here"
+            >SUBJECT: <input type="text" name="subject" placeholder="Subject"
           /></label>
           <label
             >MESSAGE:
             <textarea
               name="message"
-              placeholder="Write your message here"
+              placeholder="Message"
               rows="15"
               value=""
+              required
             ></textarea>
           </label>
-          <button>SEND</button>
+          <button type="submit">SEND</button>
         </form>
         <hr />
         <div class="wrapper">

@@ -1,10 +1,11 @@
 // Declarations
 let button = document.getElementById("button");
+let closebtn = document.getElementById("close-button");
 let menu = document.getElementsByTagName("header")[0];
 // Logic
 document.addEventListener("DOMContentLoaded", () => {
   button.addEventListener("click", () => {
-    showMenu();
+    toggleMenu();
   });
   window.addEventListener("click", (e) => {
     MenuIsOpen = menu.hasAttribute("show");
@@ -19,12 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
       !targetClosestIsMenu &&
       !targetFatherIsMenu
     ) {
-      showMenu();
+      toggleMenu();
     }
+  });
+  closebtn.addEventListener("click", () => {
+    toggleMenu();
   });
 });
 
-function showMenu() {
+function toggleMenu() {
   menu.toggleAttribute("show");
   if (menu.hasAttribute("show")) {
     menu.classList.add("open");

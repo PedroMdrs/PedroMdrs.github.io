@@ -70,13 +70,11 @@ header {
     right: -500px;
     visibility: hidden;
     background-color: hsl(209deg, 100%, 5%);
-    border: 1px solid #eaf4ff;
-    border-radius: 5px;
     height: 100vh;
     width: 50%;
     z-index: 1;
     text-align: center;
-    transition: all 0.2s;
+    transition: all 0.3s;
   }
   header > :nth-child(1) {
     display: none;
@@ -86,6 +84,58 @@ header {
     gap: 2rem;
     flex-direction: column;
     list-style: none;
+    font-family: "Sen", sans-serif;
+    color: #eaf4ff;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  header .mobile-menu .menu div {
+    position: absolute;
+    top: 1.875rem;
+    right: 1.875rem;
+    font-size: 2rem;
+  }
+  header .mobile-menu .menu a {
+    font-family: "Sen", sans-serif;
+    color: #eaf4ff;
+    font-size: 1rem;
+    line-height: 1;
+    text-decoration: none;
+  }
+}
+@media screen and (min-width: 760px) and (max-width: 1199px) {
+  header {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -500px;
+    visibility: hidden;
+    background-color: hsl(209deg, 100%, 5%);
+    height: 100vh;
+    width: 50%;
+    z-index: 1;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  header > :nth-child(1) {
+    display: none;
+  }
+  header .mobile-menu .menu {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    list-style: none;
+    font-family: "Sen", sans-serif;
+    color: #eaf4ff;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  header .mobile-menu .menu div {
+    position: absolute;
+    top: 1.875rem;
+    right: 1.875rem;
+    font-size: 2rem;
   }
   header .mobile-menu .menu a {
     font-family: "Sen", sans-serif;
@@ -124,15 +174,16 @@ header {
     gap: 50px;
   }
   header ul.menu a::after {
-    visibility: hidden;
     content: "";
     display: block;
-    width: 100%;
+    width: 0px;
     height: 2px;
     background-color: hsl(209deg, 100%, 5%);
     margin-top: 5px;
+    transition: 0.3s;
   }
   header ul.menu a:hover::after {
+    width: 100%;
     visibility: visible;
   }
   header ul.socials {
@@ -196,19 +247,12 @@ hr {
   }
 }
 .banner button {
-  position: fixed;
+  position: absolute;
   top: 1.875rem;
   right: 1.875rem;
   border: none;
   background: none;
   width: 2.25rem;
-  z-index: 2;
-  border: 1px solid #eaf4ff;
-}
-@media screen and (min-width: 760px) and (max-width: 1199px) {
-  .banner button {
-    width: 3rem;
-  }
 }
 @media screen and (min-width: 1200px) {
   .banner button {

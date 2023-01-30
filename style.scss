@@ -112,13 +112,11 @@ header {
     right: -500px;
     visibility: hidden;
     background-color: $dark-blue;
-    border: 1px solid $white;
-    border-radius: 5px;
     height: 100vh;
     width: 50%;
     z-index: 1;
     text-align: center;
-    transition: all 0.2s;
+    transition: all 0.3s;
     > :nth-child(1) {
       display: none;
     }
@@ -127,6 +125,47 @@ header {
       gap: rem(32);
       flex-direction: column;
       list-style: none;
+      @include description($white, rem(16));
+      div {
+        position: absolute;
+        top: 1.875rem;
+        right: 1.875rem;
+        font-size: rem(32);
+      }
+      a {
+        @include description($white, rem(16));
+        text-decoration: none;
+      }
+    }
+  }
+  @include device(m) {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -500px;
+    visibility: hidden;
+    background-color: $dark-blue;
+    height: 100vh;
+    width: 50%;
+    z-index: 1;
+    text-align: center;
+    transition: all 0.3s;
+    > :nth-child(1) {
+      display: none;
+    }
+    .mobile-menu .menu {
+      display: flex;
+      gap: rem(32);
+      flex-direction: column;
+      list-style: none;
+      @include description($white, rem(16));
+      div {
+        position: absolute;
+        top: 1.875rem;
+        right: 1.875rem;
+        font-size: rem(32);
+      }
       a {
         @include description($white, rem(16));
         text-decoration: none;
@@ -157,15 +196,16 @@ header {
       justify-content: space-between;
       gap: 50px;
       a::after {
-        visibility: hidden;
         content: "";
         display: block;
-        width: 100%;
+        width: 0px;
         height: 2px;
         background-color: $dark-blue;
         margin-top: 5px;
+        transition: 0.3s;
       }
       a:hover::after {
+        width: 100%;
         visibility: visible;
       }
     }
@@ -222,17 +262,13 @@ hr {
   }
 
   button {
-    position: fixed;
+    position: absolute;
     top: rem(30);
     right: rem(30);
     border: none;
     background: none;
     width: rem(36);
-    z-index: 2;
-    border: 1px solid $white;
-    @include device(m) {
-      width: rem(48);
-    }
+
     @include device(l) {
       display: none;
     }
