@@ -129,7 +129,7 @@ header {
       div {
         position: absolute;
         top: 1.875rem;
-        right: 1.875rem;
+        right: 3rem;
         font-size: rem(32);
       }
       a {
@@ -163,7 +163,7 @@ header {
       div {
         position: absolute;
         top: 1.875rem;
-        right: 1.875rem;
+        right: 2rem;
         font-size: rem(32);
       }
       a {
@@ -221,6 +221,11 @@ header {
       align-items: flex-start;
       gap: 5px;
       @include description($white, 16px);
+    }
+    .menu {
+      div {
+        display: none;
+      }
     }
   }
 }
