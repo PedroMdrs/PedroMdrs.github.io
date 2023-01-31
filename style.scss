@@ -129,7 +129,8 @@ header {
       div {
         position: absolute;
         top: 1.875rem;
-        right: 3rem;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: rem(32);
       }
       a {
@@ -163,7 +164,8 @@ header {
       div {
         position: absolute;
         top: 1.875rem;
-        right: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: rem(32);
       }
       a {

@@ -92,7 +92,8 @@ header {
   header .mobile-menu .menu div {
     position: absolute;
     top: 1.875rem;
-    right: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 2rem;
   }
   header .mobile-menu .menu a {
@@ -134,7 +135,8 @@ header {
   header .mobile-menu .menu div {
     position: absolute;
     top: 1.875rem;
-    right: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 2rem;
   }
   header .mobile-menu .menu a {
